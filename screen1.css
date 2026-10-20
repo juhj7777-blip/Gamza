@@ -1,0 +1,774 @@
+/* ==========================================================================
+   [화면 1] 감자(Gamza) - 상품 목록 및 헤더/필터 스타일 (screen1.css)
+   공통 디자인 시스템 CSS 변수(:root) 준수
+   ========================================================================== */
+
+/* 상단 고정 헤더 */
+.gamza-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(250, 246, 240, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color, #E4D9C8);
+  transition: box-shadow 0.2s ease;
+}
+
+.gamza-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 로고 영역 */
+.gamza-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-main, #2A1E17);
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.gamza-logo-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--point-yellow, #FFE033);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  box-shadow: 0 2px 6px rgba(255, 208, 0, 0.28);
+  border-radius: var(--radius-md, 12px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.gamza-brand:hover .gamza-logo-icon {
+  transform: rotate(-8deg) scale(1.05);
+  background-color: var(--point-yellow-hover, #FFD000);
+}
+
+.gamza-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.gamza-brand-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary, #7A4B3A);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.gamza-brand-subtitle {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-sub, #655247);
+  margin-top: 1px;
+}
+
+/* 검색창 영역 */
+.gamza-search-wrapper {
+  flex: 1;
+  max-width: 460px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.gamza-search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted, #968377);
+  font-size: 0.95rem;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+#search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 38px 0 40px;
+  background-color: var(--bg-subtle, #F2ECE1);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.95rem;
+  color: var(--text-main, #2A1E17);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+#search-input::placeholder {
+  color: var(--text-muted, #968377);
+}
+
+#search-input:focus {
+  background-color: var(--bg-surface, #FFFFFF);
+  border-color: var(--point-yellow-strong, #E6A800);
+  box-shadow: 0 0 0 3px rgba(255, 224, 51, 0.4);
+}
+
+.gamza-search-clear {
+  position: absolute;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--border-color, #E4D9C8);
+  color: var(--text-sub, #655247);
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.75rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease;
+}
+
+.gamza-search-clear.visible {
+  display: inline-flex;
+}
+
+.gamza-search-clear:hover {
+  background-color: var(--text-muted, #968377);
+  color: #FFFFFF;
+}
+
+/* 헤더 우측 액션 버튼들 */
+.gamza-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.gamza-btn {
+  height: 42px;
+  padding: 0 16px;
+  border-radius: var(--radius-md, 12px);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.gamza-btn-primary {
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main, #2A1E17);
+  border-color: var(--point-yellow-strong, #E6A800);
+  box-shadow: var(--shadow-point, 0 4px 12px rgba(255, 208, 0, 0.35));
+}
+
+.gamza-btn-primary:hover {
+  background-color: var(--point-yellow-hover, #FFD000);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(255, 208, 0, 0.45);
+}
+
+.gamza-btn-primary:active {
+  transform: translateY(0);
+}
+
+.gamza-btn-outline {
+  background-color: var(--bg-surface, #FFFFFF);
+  color: var(--text-main, #2A1E17);
+  border-color: var(--border-color, #E4D9C8);
+}
+
+.gamza-btn-outline:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border-color: var(--point-yellow-strong, #E6A800);
+  color: var(--text-main, #2A1E17);
+}
+
+.gamza-btn-nickname {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  color: var(--text-main, #2A1E17);
+  border-color: var(--point-yellow-strong, #E6A800);
+  font-weight: 800;
+}
+
+.gamza-btn-nickname:hover {
+  background-color: var(--point-yellow, #FFE033);
+}
+
+.gamza-btn[hidden] {
+  display: none !important;
+}
+
+/* 메인 컨텐츠 래퍼 */
+.gamza-list-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+/* 히어로 배너 (브라운 & 밝은 노란색 포인트 웰컴 바) */
+.gamza-hero-banner {
+  background: linear-gradient(135deg, var(--primary, #7A4B3A) 0%, #5E3729 100%);
+  border: 1px solid var(--primary-hover, #5E3729);
+  border-radius: var(--radius-lg, 16px);
+  padding: 22px 26px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.gamza-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gamza-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-main, #2A1E17);
+  background-color: var(--point-yellow, #FFE033);
+  padding: 4px 11px;
+  border-radius: var(--radius-pill, 9999px);
+  margin-bottom: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.gamza-hero-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.gamza-hero-desc {
+  font-size: 0.9rem;
+  color: #F2ECE1;
+  margin: 0;
+}
+
+.gamza-hero-illust {
+  font-size: 2.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  background-color: rgba(255, 224, 51, 0.18);
+  border: 1.5px solid rgba(255, 224, 51, 0.45);
+  border-radius: var(--radius-lg, 16px);
+  padding: 10px 14px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* 필터 바 (카테고리 칩 + 거래 가능만 보기 토글) */
+.gamza-filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color, #E4D9C8);
+}
+
+.gamza-category-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.gamza-category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-chip {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill, 9999px);
+  background-color: var(--bg-subtle, #F2ECE1);
+  color: var(--text-sub, #655247);
+  border: 1.5px solid transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+  font-family: inherit;
+}
+
+.category-chip:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border-color: var(--point-yellow-strong, #E6A800);
+  color: var(--text-main, #2A1E17);
+}
+
+.category-chip.active {
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main, #2A1E17);
+  border-color: var(--point-yellow-strong, #E6A800);
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(255, 208, 0, 0.35);
+}
+
+/* 거래 가능만 보기 스위치 컨트롤 */
+.gamza-filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.gamza-result-count {
+  font-size: 0.88rem;
+  color: var(--text-sub, #655247);
+  font-weight: 500;
+}
+
+.gamza-result-count strong {
+  color: var(--text-main, #2A1E17);
+  background-color: var(--point-yellow, #FFE033);
+  padding: 1px 7px;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 800;
+}
+
+.available-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill, 9999px);
+  background-color: var(--bg-surface, #FFFFFF);
+  border: 1px solid var(--border-color, #E4D9C8);
+  transition: all 0.18s ease;
+}
+
+.available-toggle-label:hover {
+  border-color: var(--point-yellow-strong, #E6A800);
+  background-color: var(--point-yellow-light, #FFF9CC);
+}
+
+.available-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.available-toggle-track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background-color: var(--border-color, #E4D9C8);
+  border-radius: var(--radius-pill, 9999px);
+  transition: background-color 0.2s ease;
+}
+
+.available-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+}
+
+.available-toggle-input:checked + .available-toggle-track {
+  background-color: var(--point-yellow, #FFE033);
+  box-shadow: inset 0 0 0 1px var(--point-yellow-strong, #E6A800);
+}
+
+.available-toggle-input:checked + .available-toggle-track .available-toggle-thumb {
+  transform: translateX(16px);
+  background-color: var(--text-main, #2A1E17);
+}
+
+.available-toggle-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main, #2A1E17);
+}
+
+/* 상품 카드 그리드 (데스크탑 3열, 태블릿 2열, 모바일 1~2열) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* 개별 상품 카드 */
+.product-card {
+  background-color: var(--bg-surface, #FFFFFF);
+  border: 1.5px solid var(--border-color, #E4D9C8);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(42, 30, 23, 0.06));
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md, 0 6px 20px rgba(42, 30, 23, 0.12));
+  border-color: var(--point-yellow-strong, #E6A800);
+}
+
+.product-card:focus-visible {
+  outline: 3px solid var(--point-yellow, #FFE033);
+  outline-offset: 2px;
+}
+
+/* 카드 썸네일 영역 (4:3 비율) */
+.product-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--bg-subtle, #F4EFE6);
+  overflow: hidden;
+}
+
+.product-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.25s ease;
+}
+
+.product-card:hover .product-thumb-img {
+  transform: scale(1.06);
+}
+
+/* 거래 완료 상품 카드 전체 살짝 흐리게 처리 */
+.product-card.is-sold {
+  opacity: 0.65;
+  background-color: var(--bg-subtle, #F2ECE1);
+}
+
+.product-card.is-sold:hover {
+  opacity: 0.85;
+}
+
+/* 거래 완료 상품 이미지 어둡게 처리 */
+.product-card.is-sold .product-thumb-img {
+  filter: brightness(0.75) grayscale(0.35);
+}
+
+.product-sold-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 34, 30, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.product-sold-overlay span {
+  background-color: rgba(44, 34, 30, 0.82);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill, 9999px);
+  letter-spacing: 0.02em;
+}
+
+.product-category-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: var(--text-sub, #6E5D53);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill, 9999px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 카드 본문 정보 */
+.product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.product-meta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* 공통 판매 상태 배지 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.status-badge.status-sale {
+  background-color: #E6F4EA;
+  color: #1E7E34;
+}
+
+.status-badge.status-reserved {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+.status-badge.status-sold {
+  background-color: #E5E3DF;
+  color: #6E5D53;
+}
+
+/* 상품명 (1rem, font-weight 600, 말줄임) */
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main, #2C221E);
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card.is-sold .product-title {
+  color: var(--text-sub, #6E5D53);
+}
+
+/* 판매 위치 · 업로드 시간 (0.85rem, --text-muted) */
+.product-location-time {
+  font-size: 0.85rem;
+  color: var(--text-muted, #9E8E84);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 가격 (1.08rem, font-weight 700, 천 단위 콤마 + 원) */
+.product-bottom-row {
+  margin-top: auto;
+  padding-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.product-price {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--text-main, #2A1E17);
+  letter-spacing: -0.02em;
+  background: linear-gradient(transparent 62%, var(--point-yellow-light, #FFF9CC) 62%);
+  padding: 0 2px;
+  transition: background 0.2s ease;
+}
+
+.product-card:hover .product-price {
+  background: linear-gradient(transparent 55%, var(--point-yellow, #FFE033) 55%);
+}
+
+.product-card.is-sold .product-price {
+  color: var(--text-muted, #968377);
+  background: none;
+}
+
+.product-seller-mini {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-sub, #655247);
+  background-color: var(--bg-subtle, #F2ECE1);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm, 8px);
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 검색/필터 결과 없음 빈 상태(Empty State) */
+.gamza-empty-state {
+  grid-column: 1 / -1;
+  background-color: var(--bg-surface, #FFFFFF);
+  border: 1px dashed var(--border-color, #E4D9C8);
+  border-radius: var(--radius-lg, 16px);
+  padding: 56px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.gamza-empty-icon {
+  font-size: 2.8rem;
+  margin-bottom: 4px;
+}
+
+.gamza-empty-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main, #2A1E17);
+  margin: 0;
+}
+
+.gamza-empty-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted, #968377);
+  margin: 0 0 12px;
+}
+
+/* 토스트 알림 (로그인 안내 등) */
+.gamza-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: var(--text-main, #2A1E17);
+  color: var(--point-yellow, #FFE033);
+  border: 1.5px solid var(--point-yellow, #FFE033);
+  padding: 12px 20px;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md, 0 6px 20px rgba(42, 30, 23, 0.25));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.gamza-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   반응형 미디어 쿼리 (태블릿 2열, 모바일 1~2열)
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .gamza-header-inner {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .gamza-brand {
+    order: 1;
+  }
+
+  .gamza-header-actions {
+    order: 2;
+  }
+
+  .gamza-btn {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 0.88rem;
+  }
+
+  .gamza-search-wrapper {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  #search-input {
+    height: 40px;
+  }
+
+  .gamza-list-main {
+    padding: 16px 16px 48px;
+  }
+
+  .gamza-hero-banner {
+    padding: 16px 18px;
+  }
+
+  .gamza-hero-title {
+    font-size: 1.05rem;
+  }
+
+  .gamza-filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .gamza-filter-controls {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 520px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gamza-brand-subtitle {
+    display: none;
+  }
+}

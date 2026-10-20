@@ -1,0 +1,557 @@
+/* ==========================================================================
+   감자(Gamza) - [화면 3: 글쓰기 (내 물건 팔기)] 스타일시트 (screen3.css)
+   공통 디자인 시스템 CSS 변수 100% 준수
+   ========================================================================== */
+
+.s3-write-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  box-sizing: border-box;
+  color: var(--text-main);
+  animation: s3FadeIn 0.22s ease-out;
+}
+
+@keyframes s3FadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 상단 네비게이션 헤더 */
+.s3-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.s3-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 14px;
+  background-color: var(--bg-surface);
+  color: var(--text-sub);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.s3-back-btn:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+}
+
+.s3-header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.s3-header-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.s3-header-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main);
+  border: 1px solid var(--point-yellow-strong, #E6A800);
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+/* 메인 폼 카드 */
+.s3-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 28px 24px;
+  box-sizing: border-box;
+}
+
+.s3-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 각 필드 그룹 */
+.s3-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.s3-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.s3-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.s3-required-dot {
+  color: var(--point-yellow-strong, #E6A800);
+  font-weight: 800;
+}
+
+.s3-helper-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* 공통 입력창 (텍스트 / 숫자 / 셀렉트 / 텍스트에어리어) */
+.s3-input,
+.s3-select,
+.s3-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--bg-subtle);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.s3-input,
+.s3-select {
+  height: 44px;
+  padding: 0 14px;
+}
+
+.s3-textarea {
+  min-height: 136px;
+  padding: 12px 14px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.s3-input::placeholder,
+.s3-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.s3-input:focus,
+.s3-select:focus,
+.s3-textarea:focus {
+  outline: none;
+  background-color: var(--bg-surface);
+  border-color: var(--point-yellow-strong, #E6A800);
+  box-shadow: 0 0 0 3px rgba(255, 224, 51, 0.4);
+}
+
+.s3-input.s3-input-error,
+.s3-textarea.s3-input-error {
+  border-color: #D9534F;
+  background-color: #FFF8F8;
+}
+
+/* 1. 상품 이미지 업로드 & 샘플/URL 영역 */
+.s3-image-section {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.s3-image-preview-box {
+  position: relative;
+  width: 148px;
+  height: 148px;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--border-color);
+  background-color: var(--bg-subtle);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.18s ease, transform 0.15s ease;
+}
+
+.s3-image-preview-box:hover {
+  border-color: var(--point-yellow-strong, #E6A800);
+}
+
+.s3-image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.s3-image-overlay-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(42, 30, 23, 0.82);
+  color: var(--point-yellow, #FFE033);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.s3-image-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.s3-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.s3-file-upload-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 14px;
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(255, 208, 0, 0.25);
+  transition: all 0.18s ease;
+}
+
+.s3-file-upload-label:hover {
+  background-color: var(--point-yellow-hover, #FFD000);
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+  transform: translateY(-1px);
+}
+
+.s3-file-input-hidden {
+  display: none;
+}
+
+.s3-sample-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.s3-sample-chip {
+  height: 32px;
+  padding: 0 11px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-subtle);
+  color: var(--text-sub);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.s3-sample-chip:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+}
+
+.s3-sample-chip.is-active {
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+  font-weight: 700;
+}
+
+/* 3. 카테고리 캡슐 칩 & 드롭다운 병행 지원 */
+.s3-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.s3-category-chip {
+  height: 38px;
+  padding: 0 15px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-color);
+  background-color: var(--bg-subtle);
+  color: var(--text-sub);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.s3-category-chip:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border-color: var(--point-yellow-strong, #E6A800);
+  color: var(--text-main);
+}
+
+.s3-category-chip.is-selected {
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(255, 208, 0, 0.35);
+}
+
+/* 4. 가격 & 6. 거래 동네 2열 반응형 그리드 */
+.s3-two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.s3-price-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.s3-price-input-wrap .s3-input {
+  padding-right: 38px;
+  font-weight: 700;
+}
+
+.s3-price-unit {
+  position: absolute;
+  right: 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  pointer-events: none;
+}
+
+.s3-location-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.s3-location-chip {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.s3-location-chip:hover {
+  color: var(--text-main);
+  border-color: var(--point-yellow-strong, #E6A800);
+  background-color: var(--point-yellow-light, #FFF9CC);
+}
+
+/* 7. 판매 상태 세그먼트 / 라디오 버튼 (공통 배지 색상 반영) */
+.s3-status-segment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.s3-status-option {
+  position: relative;
+}
+
+.s3-status-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s3-status-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-color);
+  background-color: var(--bg-subtle);
+  color: var(--text-sub);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.s3-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--text-muted);
+}
+
+/* 판매중 (#E6F4EA / #1E7E34) */
+.s3-status-radio[value="판매중"]:checked + .s3-status-label {
+  background-color: #E6F4EA;
+  color: #1E7E34;
+  border-color: #1E7E34;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.s3-status-radio[value="판매중"]:checked + .s3-status-label .s3-status-dot {
+  background-color: #1E7E34;
+}
+
+/* 예약중 (#FEF3C7 / #B45309) */
+.s3-status-radio[value="예약중"]:checked + .s3-status-label {
+  background-color: #FEF3C7;
+  color: #B45309;
+  border-color: #B45309;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.s3-status-radio[value="예약중"]:checked + .s3-status-label .s3-status-dot {
+  background-color: #B45309;
+}
+
+/* 거래 완료 (#E5E3DF / #6E5D53) */
+.s3-status-radio[value="거래 완료"]:checked + .s3-status-label {
+  background-color: #E5E3DF;
+  color: #6E5D53;
+  border-color: #6E5D53;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.s3-status-radio[value="거래 완료"]:checked + .s3-status-label .s3-status-dot {
+  background-color: #6E5D53;
+}
+
+/* 경고/오류 메시지 배너 */
+.s3-alert-msg {
+  display: none;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  color: var(--text-main);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.s3-alert-msg.is-visible {
+  display: block;
+}
+
+/* 하단 버튼 영역 */
+.s3-footer-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.s3-cancel-btn {
+  flex: 0 0 120px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-subtle);
+  color: var(--text-sub);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.s3-cancel-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.s3-submit-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  background-color: var(--point-yellow, #FFE033);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-point, 0 4px 12px rgba(255, 208, 0, 0.35));
+  transition: background-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+}
+
+.s3-submit-btn:hover {
+  background-color: var(--point-yellow-hover, #FFD000);
+  box-shadow: 0 6px 14px rgba(255, 208, 0, 0.45);
+}
+
+.s3-submit-btn:active {
+  transform: translateY(1px);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 600px) {
+  .s3-write-wrapper {
+    padding: 16px 12px 48px;
+  }
+
+  .s3-card {
+    padding: 20px 16px;
+  }
+
+  .s3-image-section {
+    grid-template-columns: 1fr;
+  }
+
+  .s3-image-preview-box {
+    width: 100%;
+    height: 180px;
+  }
+
+  .s3-two-col-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .s3-status-segment {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="포근한 브라운 감성 우리 동네 중고 직거래 장터, 감자(Gamza)" />
+  <title>감자(Gamza) - 포근한 우리 동네 중고장터</title>
+  <!-- 파비콘 (감자 이모지 SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥔</text></svg>" />
+  <!-- Pretendard 웹폰트 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- 통합 공통 스타일 및 3개 화면 스타일시트 -->
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./screen1.css" />
+  <link rel="stylesheet" href="./screen2.css" />
+  <link rel="stylesheet" href="./screen3.css" />
+</head>
+<body>
+  <!-- [화면 1] 상품 목록 컨테이너 -->
+  <div id="screen-list-container"></div>
+
+  <!-- [화면 3] 글쓰기 화면 컨테이너 (초기 숨김) -->
+  <div id="screen3-container" hidden style="display: none;"></div>
+
+  <!-- [화면 2] 상세 팝업(모달)은 screen2.js가 #detail-modal-overlay로 자동 마운트합니다 -->
+
+  <!-- [인증 모달] 로그인 / 회원가입 모달 -->
+  <div id="auth-modal-overlay" class="auth-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" hidden>
+    <div class="auth-modal-card" role="document">
+      <button type="button" id="btn-close-auth-modal" class="btn-close-auth-modal" aria-label="로그인 창 닫기" title="닫기 (ESC)">✕</button>
+
+      <div class="auth-modal-header">
+        <div class="auth-modal-logo" aria-hidden="true">🥔</div>
+        <h2 id="auth-modal-title" class="auth-modal-title">감자 마켓 로그인</h2>
+        <p id="auth-modal-subtitle" class="auth-modal-subtitle">포근한 우리 동네 중고장터에서 따뜻한 거래를 시작해보세요</p>
+      </div>
+
+      <div id="auth-modal-notice" class="auth-modal-notice" hidden></div>
+
+      <div class="auth-tabs" role="tablist" aria-label="로그인 및 회원가입 전환">
+        <button type="button" id="auth-tab-login" class="auth-tab is-active" data-auth-mode="login" role="tab" aria-selected="true">
+          로그인
+        </button>
+        <button type="button" id="auth-tab-signup" class="auth-tab" data-auth-mode="signup" role="tab" aria-selected="false">
+          회원가입
+        </button>
+      </div>
+
+      <form id="auth-form" class="auth-form" novalidate>
+        <div class="auth-field-group">
+          <label class="auth-label" for="auth-email">
+            이메일 <span class="auth-required">*</span>
+          </label>
+          <input
+            type="email"
+            id="auth-email"
+            class="auth-input"
+            placeholder="example@gamza.kr"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="auth-field-group">
+          <label class="auth-label" for="auth-password">
+            비밀번호 <span class="auth-required">*</span>
+          </label>
+          <input
+            type="password"
+            id="auth-password"
+            class="auth-input"
+            placeholder="비밀번호를 입력해주세요 (6자 이상)"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <div id="auth-nickname-group" class="auth-field-group" hidden style="display: none;">
+          <div class="auth-label-row">
+            <label class="auth-label" for="auth-nickname">
+              닉네임 <span class="auth-required">*</span>
+            </label>
+            <span class="auth-helper-text">글 작성 시 작성자로 표시됩니다</span>
+          </div>
+          <input
+            type="text"
+            id="auth-nickname"
+            class="auth-input"
+            maxlength="20"
+            placeholder="사용하실 닉네임을 입력해주세요 (예: 포슬감자)"
+            autocomplete="nickname"
+          />
+        </div>
+
+        <div id="auth-alert-msg" class="auth-alert-msg" role="alert"></div>
+
+        <button type="submit" id="auth-submit-btn" class="gamza-btn gamza-btn-primary auth-submit-btn">
+          로그인하기
+        </button>
+
+        <div class="auth-switch-row">
+          <span id="auth-switch-text">아직 감자 이웃이 아니신가요?</span>
+          <button type="button" id="btn-auth-switch-mode" class="auth-switch-link">회원가입하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="gamza-footer">
+    <span class="gamza-footer-brand">🥔 감자(Gamza) 중고장터</span>
+    <span>포근한 브라운 감성 우리 동네 직거래 웹 서비스 · Supabase 실시간 데이터베이스 연동</span>
+  </footer>
+
+  <!-- Supabase JS SDK (v2) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- 3개 화면 스크립트 및 통합 앱 컨트롤러 -->
+  <script src="./screen1.js"></script>
+  <script src="./screen2.js"></script>
+  <script src="./screen3.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

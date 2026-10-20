@@ -1,0 +1,403 @@
+/* ==========================================================================
+   감자(Gamza) 공통 디자인 시스템 & 전역 스타일 (style.css)
+   3개 화면(상품 목록 / 상세 팝업 / 글쓰기)을 하나로 묶는 통합 토큰 및 기본 리셋
+   ========================================================================== */
+
+:root {
+  /* 감자 테마 컬러 팔레트 (포근한 구운 감자 브라운 & 시선을 끄는 밝은 버터 노란색 포인트) */
+  --bg-main: #FAF6F0;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F2ECE1;
+  --primary: #7A4B3A;
+  --primary-hover: #5E3729;
+  --primary-light: #EFE5DC;
+
+  /* 시선을 끄는 밝은 노란색 포인트 컬러 */
+  --point-yellow: #FFE033;
+  --point-yellow-hover: #FFD000;
+  --point-yellow-light: #FFF9CC;
+  --point-yellow-strong: #E6A800;
+  --accent-gold: #FFE033;
+
+  --text-main: #2A1E17;
+  --text-sub: #655247;
+  --text-muted: #968377;
+  --border-color: #E4D9C8;
+
+  /* 공통 모서리 곡률 & 그림자 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --shadow-sm: 0 2px 8px rgba(42, 30, 23, 0.06);
+  --shadow-md: 0 6px 20px rgba(42, 30, 23, 0.12);
+  --shadow-point: 0 4px 12px rgba(255, 208, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 화면 전환 컨테이너 */
+#screen-list-container,
+#screen3-container {
+  width: 100%;
+}
+
+#screen3-container[hidden] {
+  display: none !important;
+}
+
+/* 세 화면 공통 판매 상태 배지 (판매중 / 예약중 / 거래 완료) */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.status-badge.status-sale {
+  background-color: #E6F4EA;
+  color: #1E7E34;
+}
+
+.status-badge.status-reserved {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+.status-badge.status-sold {
+  background-color: #E5E3DF;
+  color: #6E5D53;
+}
+
+/* 하단 푸터 */
+.gamza-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 44px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gamza-footer-brand {
+  font-weight: 700;
+  color: var(--text-sub);
+}
+
+/* ==========================================================================
+   [인증 모달] 로그인 / 회원가입 모달 스타일
+   ========================================================================== */
+
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background-color: rgba(42, 30, 23, 0.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+.auth-modal-overlay[hidden] {
+  display: none !important;
+}
+
+.auth-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.auth-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--bg-surface, #FFFFFF);
+  border: 1.5px solid var(--border-color, #E4D9C8);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-md, 0 6px 20px rgba(42, 30, 23, 0.14));
+  padding: 28px 26px 26px;
+  transform: translateY(14px) scale(0.98);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.auth-modal-overlay.is-open .auth-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.btn-close-auth-modal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill, 9999px);
+  border: 1px solid var(--border-color, #E4D9C8);
+  background-color: var(--bg-subtle, #F2ECE1);
+  color: var(--text-sub, #655247);
+  font-size: 1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-close-auth-modal:hover {
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border-color: var(--point-yellow-strong, #E6A800);
+  color: var(--text-main, #2A1E17);
+}
+
+.auth-modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.auth-modal-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md, 12px);
+  background-color: var(--point-yellow, #FFE033);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  box-shadow: 0 3px 8px rgba(255, 208, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.auth-modal-title {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main, #2A1E17);
+  letter-spacing: -0.02em;
+}
+
+.auth-modal-subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-sub, #655247);
+}
+
+.auth-modal-notice {
+  margin-bottom: 16px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md, 12px);
+  background-color: var(--point-yellow-light, #FFF9CC);
+  border: 1.5px solid var(--point-yellow-strong, #E6A800);
+  color: var(--text-main, #2A1E17);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.auth-modal-notice[hidden] {
+  display: none !important;
+}
+
+/* 탭 전환 (로그인 / 회원가입) */
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 5px;
+  background-color: var(--bg-subtle, #F2ECE1);
+  border-radius: var(--radius-md, 12px);
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  height: 38px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm, 8px);
+  background: transparent;
+  color: var(--text-sub, #655247);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.auth-tab:hover {
+  color: var(--text-main, #2A1E17);
+}
+
+.auth-tab.is-active {
+  background-color: var(--point-yellow, #FFE033);
+  border-color: var(--point-yellow-strong, #E6A800);
+  color: var(--text-main, #2A1E17);
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(255, 208, 0, 0.3);
+}
+
+/* 인증 폼 */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-field-group[hidden] {
+  display: none !important;
+}
+
+.auth-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.auth-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main, #2A1E17);
+}
+
+.auth-required {
+  color: var(--point-yellow-strong, #E6A800);
+  font-weight: 800;
+}
+
+.auth-helper-text {
+  font-size: 0.78rem;
+  color: var(--text-muted, #968377);
+}
+
+.auth-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-md, 12px);
+  border: 1.5px solid var(--border-color, #E4D9C8);
+  background-color: var(--bg-subtle, #F2ECE1);
+  color: var(--text-main, #2A1E17);
+  font-family: inherit;
+  font-size: 0.94rem;
+  transition: all 0.18s ease;
+  outline: none;
+}
+
+.auth-input::placeholder {
+  color: var(--text-muted, #968377);
+}
+
+.auth-input:focus {
+  background-color: var(--bg-surface, #FFFFFF);
+  border-color: var(--point-yellow-strong, #E6A800);
+  box-shadow: 0 0 0 3px rgba(255, 224, 51, 0.38);
+}
+
+.auth-input.is-error {
+  border-color: #D9534F;
+  background-color: #FFF8F8;
+}
+
+.auth-alert-msg {
+  display: none;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm, 8px);
+  background-color: #FFF5F5;
+  border: 1.5px solid #F1AEB5;
+  color: #B02A37;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.auth-alert-msg.is-visible {
+  display: block;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  height: 46px;
+  margin-top: 4px;
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.auth-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.86rem;
+  color: var(--text-sub, #655247);
+}
+
+.auth-switch-link {
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  color: var(--primary, #7A4B3A);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.auth-switch-link:hover {
+  color: var(--text-main, #2A1E17);
+}
